@@ -1,0 +1,177 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{graphicx}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{BRSU} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Planning and Scheduling\\Assignment 2 \\
+Representations % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Bastian Lang} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Remark}
+For part 1 and 4 of this assignment I only rewrote the problem, I did not correct the given description. For a \textit{pickup} or an \textit{unstack} operation the robot hand would have to be empty, i.e. holding = nil. But this is not listed as a precondition in the given problem description, so I did not add it in my solution.\\
+Also I did not add a definition of the constant symbols and the state variables as this has not been done by the provided classical representation as well. 
+
+\section{Rewrite the problem as a set-theoretic planning problem.}
+$s_0$ = $\{$on-c1-table, on-c3-c2, clear-c3, on-c2-table, clear-c1$\}$\\
+g = $\{$on-c1-c2, on-c2-c3$\}$
+\subsection{pickup}
+\textbf{Rule:} For every block cX exchange x of the classical representation with cX.\\\\
+
+\textbf{pickup-c1}\\
+precond: on-c1-table, clear(c1)\\
+effects: $\lnot$ on-c1-table, $\lnot$ clear(c1), holding(c1)\\\\
+
+\textbf{pickup-c2}\\
+precond: on-c2-table, clear(c2)\\
+effects: $\lnot$ on-c2-table, $\lnot$ clear(c2), holding(c2)\\\\
+
+\textbf{pickup-c3}\\
+precond: on-c3-table, clear(c3)\\
+effects: $\lnot$ on-c3-table, $\lnot$ clear(c3), holding(c3)\\
+
+\subsection{putdown}
+\textbf{Rule:} For every block cX exchange x of the classical representation with cX.\\\\
+
+\textbf{putdown-c1}\\
+precond: holding(c1)\\
+effects: on-c1-table, clear(c1),$\lnot$holding(c1)\\\\
+
+\textbf{putdown-c2}\\
+precond: holding(c2)\\
+effects: on-c2-table, clear(c2),$\lnot$holding(c2)\\\\
+
+\textbf{putdown-c3}\\
+precond: holding(c3)\\
+effects: on-c3-table, clear(c3),$\lnot$holding(c3)\\\\
+
+\subsection{unstack}
+\textbf{Rule:} For every two blocks cX and cY exchange x of the classical representation with cX and y with cY.\\\\
+
+\textbf{unstack-c1-c2}\\
+precond: on-c1-c2, clear(c1)\\
+effects: $\lnot$on-c1-c2, $\lnot$clear-c1, holding-c1, clear-c2\\\\
+
+\textbf{unstack-c1-c3}\\
+precond: on-c1-c3, clear(c1)\\
+effects: $\lnot$on-c1-c3, $\lnot$clear-c1, holding-c1, clear-c3\\\\
+
+\textbf{unstack-c2-c3}\\
+precond: on-c2-c3, clear(c2)\\
+effects: $\lnot$on-c2-c3, $\lnot$clear-c2, holding-c2, clear-c3\\\\
+
+\subsection{stack}
+\textbf{Rule:} For every two blocks cX and cY exchange x of the classical representation with cX and y with cY.\\\\
+
+\textbf{stack-c1-c2}\\
+precond: holding-c1, clear-c2\\
+effects: clear-c1, on-c1-c2, $\lnot$clear-c2, $\lnot$holding-c1\\\\
+
+\textbf{stack-c1-c3}\\
+precond: holding-c1, clear-c3\\
+effects: clear-c1, on-c1-c3, $\lnot$clear-c3, $\lnot$holding-c1\\\\
+
+\textbf{stack-c3-c2}\\
+precond: holding-c3, clear-c2\\
+effects: clear-c3, on-c3-c2, $\lnot$clear-c2, $\lnot$holding-c3\\\\
+
+\section{Why are there separate operators for putdown and stack, rather than a single operator for
+both?}
+
+Because in this problem there is always an empty spot on the table. So to put down a block the only precondition to check is if the block is being held right now.\\
+To stack a block upon another block, there is one more precondition to check: there may not already be another block upon the second block.
+
+\section{In the DWR domain, why do we not need two operators analogous to putdown and stack for placing containers onto a pile with a crane?}
+
+In DWR containers may only be placed on piles. So the pile has always to be specified. Therefore we cannot have a \textit{take} or \textit{put} operation that does not specify the pile.\\
+I \textit{guess} that by choosing nil or the pile itself as the \textit{d} in the \textit{put} operation (d = object the chosen container is put upon) one can address an empty pile. But then also top(p,p) should be valid - a pile being the top of itself. Otherwise there are two operations missing in the slide set(putting and taking from an empty pile).
+
+\section{Rewrite the problem as a state-variable planning problem.}
+$s_0$ = $\{$pos(c1) = table, pos(c3) = c2, clear(c3) = 1, pos(c2) = table, clear(c2) = 1 $\}$\\
+g = $\{$pos(c1) = c2, pos(c2) = c3$\}$
+
+\subsection{pickup}
+\textbf{pickup(x: block)}\\
+preconds: pos(x) = table, clear(x) = 1\\
+effects: pos(x) = nil, clear(x) = 0, holding = x\\
+
+\subsection{putdown}
+
+\textbf{putdown(x: block)}\\
+preconds: holding = x\\
+effects: pos(x) = table, clear(x) = 1, holding = nil\\
+
+\subsection{unstack}
+
+\textbf{unstack(x: block, y: block)}\\
+preconds: pos(x) = y, clear(x) = 1\\
+effects: pos(x) = nil, clear(x) = 0, holding = x, clear(y) = 1\\
+
+\subsection{stack}
+
+\textbf{stack(x: block, y: block)}\\
+preconds: holding = x, clear(y) = 1\\
+effects: clear(x) = 1, pos(x) = y, clear(y) = 0, holding = nil\\
+
+\end{document}
