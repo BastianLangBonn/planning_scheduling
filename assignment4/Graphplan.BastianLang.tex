@@ -1,0 +1,107 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{graphicx}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{BRSU} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Graphplan\\Assignment 4 \\
+Plan Space Planning % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Bastian Lang} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Is the graphplan algorithm sound? What does this mean?}
+Yes\vspace{5mm}
+
+Whenever the algorithm finds a plan, this plan has to be legal. Graphplan does that.
+\section{Is it complete? What does this mean?}
+Yes\vspace{5mm}
+
+A search-algorithm is said to be complete if it finds a solution every time given that a solution exists.\vspace{5mm}
+
+If a legal plan exists, then Graphplan will find it.
+
+\section{Will it always find the shortest plan?}
+Yes\vspace{5mm}
+
+In each level the algorithm either finds a valid plan for time step i or gives proof that there is no valid plan taking i or less steps. It therefore will always find the shortest plan, if it finds a plan.
+
+\section{How do we build the planning graph (for each level, what do we do)? Do we check for mutexes each and every that time we add a level? (Be careful answering this one ;-) Please reference the page in either the book or the paper in your answer)?}
+
+We \textbf{start} by creating the initial proposition level by placing all initial conditions in it.\vspace{5mm}
+
+To \textbf{create an action level} we insert an action node for each operator and each way of instantiating preconditions of that operator to the previous level's propositions, if no two preconditions of that operator are marked mutually exclusive.\\
+Additionally we add all no-op operators and the precondition edges.\\ 
+We then check the actions for mutual exclusiveness. This is done in two ways:
+\begin{itemize}
+	\item Check if either of the actions delete a precondition or an Add-effect of the other action [inference]
+	\item Check if there is a precondition of action a and a precondition of action b that are mutually exclusive [competing needs]
+\end{itemize}
+For each created action we store a list of mutually exclusive actions.\vspace{5mm}
+
+We create a \textbf{propositional level} by simply placing all Add-Effects of the previous action level and connecting them with add- and delete-edges.\\
+Two propositions are marked as mutually exclusive if all ways of generating the first are exclusive of the ways to create the second.\vspace{5mm}
+
+Except for the very first propositional level we check for exclusiveness every time we create a new level (see paper, p.7)\\
+There may be action levels without mutually exclusive actions. Then there would also be no need to check for exclusiveness in the following propositional level, because no two propositions could be created by exclusive actions (because there are none...).
+
+\end{document}
