@@ -1,0 +1,109 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{graphicx}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{BRSU} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Planning and Scheduling\\Assignment 3 \\
+Plan Space Planning % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Bastian Lang} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{What is the plan representation in plan-space planning? Describe what each component
+of the plan tells us.}
+
+"A plan is defined as a set of planning operators together with ordering constraints and binding constraints.",\\
+\textit{Ghallab, M., Nau, D., \& Traverso, P. (2004). Automated planning: theory \& practice. Elsevier.}\vspace{5mm}
+
+"A \textit{parial plan} is a tuple $\pi=(A,<,B,L)$, where:
+\begin{itemize}
+	\item $A = \{a_1, ..., a_k\}$ is a set of partially instantiated planning operators.
+	\item $<$ is a set of ordering constraints on A of the form $(a_i < a_j).$
+	\item B is a set of binding constraints on the variables of actions in A of the form $x=y, x\neq y$, or $x\in D_x, D_x$ being a subset of the domain of x.
+	\item L is a set of causal links of the form $\langle a_i \overset{p}{\rightarrow} a_j \rangle$, such that $a_i$ and $a_j$ are actions in A, the constraint $(a_i<a_j)$ is in $<$, proposition p is an effect of $a_i$ and a precondition of $a_j$, and the binding constraints for variables of $a_i$ and $a_j$ appearing in p are in B."
+\end{itemize}
+
+"A partial plan is a solution plan for problem $P = (\Sigma, s_0, g)$ if:
+\begin{itemize}
+	\item its ordering constraints < and binding constraints B are consistent
+	\item every sequence of totally ordered and totally instantiated actions of A satisfying < and B is a sequence that defines a path in the state-transition system $\Sigma$ from the initial state $s_0$ corresponding to effects of action $a_0$ to a state containing all goal propositions in g given by preconditions of $a_{\infty}$."
+\end{itemize}
+
+\textit{Ghallab, M., Nau, D., \& Traverso, P. (2004). Automated planning: theory \& practice. Elsevier.}\vspace{5mm}
+
+\textbf{A} contains all the actions that we have to take during the progression from the initial to the goal state.\\
+The \textbf{ordering constraints} tell us which actions have to precede which other actions.\\
+The \textbf{binding constraints} give us information about the values that certain variables of actions may or may not have.\\
+The \textbf{causal links} tell us about correlated actions, i.e. that the effect of one action is the precondition of another and that they therefore have to be performed in the correct order without any actions reverting the proposition in between.
+
+\section{Look at the POP procedure (final slides). Determine if there are differences to PSP and, if yes, where are they.}
+
+PSP is a generic schema and PoP is a variant of PSP.\\
+The main difference is that PSP processes the two types of flaws in a similar way. It heuristically selects a flaw from any type at any recursion.\\
+PoP first refines with respect to a subgoal and then proceeds by solving all threads due to the resolver of that subgoal.\vspace{5mm}
+
+Taken from: \textit{Ghallab, M., Nau, D., \& Traverso, P. (2004). Automated planning: theory \& practice. Elsevier.}
+
+
+
+\end{document}
