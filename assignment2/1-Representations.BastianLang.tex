@@ -73,6 +73,7 @@ Representations % The assignment title
 For part 1 and 4 of this assignment I only rewrote the problem, I did not correct the given description. For a \textit{pickup} or an \textit{unstack} operation the robot hand would have to be empty, i.e. holding = nil. But this is not listed as a precondition in the given problem description, so I did not add it in my solution.\\
 Also I did not add a definition of the constant symbols and the state variables as this has not been done by the provided classical representation as well. 
 
+\section{Exercises}
 \section{Rewrite the problem as a set-theoretic planning problem.}
 $s_0$ = $\{$on-c1-table, on-c3-c2, clear-c3, on-c2-table, clear-c1$\}$\\
 g = $\{$on-c1-c2, on-c2-c3$\}$
@@ -80,61 +81,61 @@ g = $\{$on-c1-c2, on-c2-c3$\}$
 \textbf{Rule:} For every block cX exchange x of the classical representation with cX.\\\\
 
 \textbf{pickup-c1}\\
-precond: on-c1-table, clear(c1)\\
-effects: $\lnot$ on-c1-table, $\lnot$ clear(c1), holding(c1)\\\\
+precond: on-c1-table, clear-c1\\
+effects: $\lnot$ on-c1-table, $\lnot$ clear-c1, holding-c1\\\\
 
 \textbf{pickup-c2}\\
-precond: on-c2-table, clear(c2)\\
-effects: $\lnot$ on-c2-table, $\lnot$ clear(c2), holding(c2)\\\\
+precond: on-c2-table, clear-c2\\
+effects: not-on-c2-table, not-clear-c2, holding-c2\\\\
 
 \textbf{pickup-c3}\\
-precond: on-c3-table, clear(c3)\\
-effects: $\lnot$ on-c3-table, $\lnot$ clear(c3), holding(c3)\\
+precond: on-c3-table, clear-c3\\
+effects: not-on-c3-table, not-clear-c3, holding-c3\\
 
 \subsection{putdown}
 \textbf{Rule:} For every block cX exchange x of the classical representation with cX.\\\\
 
 \textbf{putdown-c1}\\
-precond: holding(c1)\\
-effects: on-c1-table, clear(c1),$\lnot$holding(c1)\\\\
+precond: holding-c1\\
+effects: on-c1-table, clear-c1,not-holding-c1\\\\
 
 \textbf{putdown-c2}\\
-precond: holding(c2)\\
-effects: on-c2-table, clear(c2),$\lnot$holding(c2)\\\\
+precond: holding-c2\\
+effects: on-c2-table, clear-c2,not-holding-c2\\\\
 
 \textbf{putdown-c3}\\
-precond: holding(c3)\\
-effects: on-c3-table, clear(c3),$\lnot$holding(c3)\\\\
+precond: holding-c3\\
+effects: on-c3-table, clear-c3,not-holding-c3\\\\
 
 \subsection{unstack}
 \textbf{Rule:} For every two blocks cX and cY exchange x of the classical representation with cX and y with cY.\\\\
 
 \textbf{unstack-c1-c2}\\
-precond: on-c1-c2, clear(c1)\\
-effects: $\lnot$on-c1-c2, $\lnot$clear-c1, holding-c1, clear-c2\\\\
+precond: on-c1-c2, clear-c1\\
+effects: not-on-c1-c2, not-clear-c1, holding-c1, clear-c2\\\\
 
 \textbf{unstack-c1-c3}\\
-precond: on-c1-c3, clear(c1)\\
+precond: on-c1-c3, clear-c1\\
 effects: $\lnot$on-c1-c3, $\lnot$clear-c1, holding-c1, clear-c3\\\\
 
 \textbf{unstack-c2-c3}\\
-precond: on-c2-c3, clear(c2)\\
-effects: $\lnot$on-c2-c3, $\lnot$clear-c2, holding-c2, clear-c3\\\\
+precond: on-c2-c3, clear-c2\\
+effects: not-on-c2-c3, not-clear-c2, holding-c2, clear-c3\\\\
 
 \subsection{stack}
 \textbf{Rule:} For every two blocks cX and cY exchange x of the classical representation with cX and y with cY.\\\\
 
 \textbf{stack-c1-c2}\\
-precond: holding-c1, clear-c2\\
-effects: clear-c1, on-c1-c2, $\lnot$clear-c2, $\lnot$holding-c1\\\\
+precond: holding-c1, clear-c2\\t-
+effects: clear-c1, on-c1-c2, not-clear-c2, not-holding-c1\\\\
 
 \textbf{stack-c1-c3}\\
 precond: holding-c1, clear-c3\\
-effects: clear-c1, on-c1-c3, $\lnot$clear-c3, $\lnot$holding-c1\\\\
+effects: clear-c1, on-c1-c3, not-clear-c3, not-holding-c1\\\\
 
 \textbf{stack-c3-c2}\\
 precond: holding-c3, clear-c2\\
-effects: clear-c3, on-c3-c2, $\lnot$clear-c2, $\lnot$holding-c3\\\\
+effects: clear-c3, on-c3-c2, not-clear-c2, not-holding-c3\\\\
 
 \section{Why are there separate operators for putdown and stack, rather than a single operator for
 both?}
@@ -148,7 +149,7 @@ In DWR containers may only be placed on piles. So the pile has always to be spec
 I \textit{guess} that by choosing nil or the pile itself as the \textit{d} in the \textit{put} operation (d = object the chosen container is put upon) one can address an empty pile. But then also top(p,p) should be valid - a pile being the top of itself. Otherwise there are two operations missing in the slide set(putting and taking from an empty pile).
 
 \section{Rewrite the problem as a state-variable planning problem.}
-$s_0$ = $\{$pos(c1) = table, pos(c3) = c2, clear(c3) = 1, pos(c2) = table, clear(c2) = 1 $\}$\\
+$s_0$ = $\{$pos(c1) = table, pos(c3) = c2, clear(c3) = 1, pos(c2) = table, clear(c2) = 0 $\}$\\
 g = $\{$pos(c1) = c2, pos(c2) = c3$\}$
 
 \subsection{pickup}
