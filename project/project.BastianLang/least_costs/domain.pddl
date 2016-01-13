@@ -1,0 +1,63 @@
+(define (domain domain)
+	(:requirements :adl) 
+	(:types s1 s2 s3 s4 s5 s6 - station
+		o1 o2 o3 o4 o5 o6 o7 o8 - object)
+	(:predicates 	
+			(robot_at ?s - station)
+			(at_location ?o - object ?s - station)
+			(grapped ?o - object)
+			(staged ?o - object)
+			(gripper_free)
+			(end_of_line ?o - object)
+			(part_of_line ?o - object)
+			(line ?o1 - object ?o2 - object ?s - station)
+	)
+	(:functions
+		(distance ?from ?to)
+		(total-cost)
+	)
+	(:action move
+		:parameters (?from ?to - station)
+		:precondition (robot_at ?from)
+		:effect (and (robot_at ?to) (not (robot_at ?from))(increase (total-cost) (distance ?from ?to)))
+	)
+	(:action pick
+		:parameters (?o - object ?s - station)
+		:precondition (and (gripper_free) (robot_at ?s) (at_location ?o ?s) (not(part_of_line ?o)))
+		:effect (and (not (gripper_free)) (not (at_location ?o ?s)) (grapped ?o))
+	)
+	(:action place
+		:parameters (?o - object ?s - station)
+		:precondition (and (robot_at ?s) (grapped ?o))
+		:effect (and (gripper_free) (at_location ?o ?s) (not (grapped ?o)))
+	)
+	(:action align_with_object
+		:parameters (?o - object ?o_new - object ?s - station)
+		:precondition (and (robot_at ?s) (at_location ?o ?s) (grapped ?o_new) (not(part_of_line ?o)))
+		:effect	(and (gripper_free) (line ?o ?o_new ?s) (not(grapped ?o_new)) (at_location ?o_new ?s) (end_of_line ?o_new) (part_of_line ?o) (part_of_line ?o_new))
+	)
+	(:action add_to_line
+		:parameters (?o1 - object ?o2 - object ?o_new - object ?s - station)
+		:precondition (and (robot_at ?s) (grapped ?o_new) (at_location ?o1 ?s) (at_location ?o2 ?s) (end_of_line ?o2) (line ?o1 ?o2 ?s))
+		:effect (and 	(gripper_free) 
+				(at_location ?o_new ?s) 
+				(not (grapped o_new))
+				(line ?o2 ?o_new ?s)
+				(line ?o1 ?o2 ?o_new ?s) 
+				(end_of_line ?o_new) 
+				(not (end_of_line ?o2))
+				(part_of_line ?o_new)			
+			)
+	)
+	(:action stage
+		:parameters (?o - object)
+		:precondition (grapped ?o) 
+		:effect (and (staged ?o)(gripper_free) (not(grapped ?o)) )
+	)
+	(:action unstage
+		:parameters (?o - object)
+		:precondition (and (staged ?o) (gripper_free))
+		:effect (and (not(staged ?o)) (grapped ?o) (not(gripper_free)))
+	)
+
+)

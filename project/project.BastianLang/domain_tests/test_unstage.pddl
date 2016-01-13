@@ -1,0 +1,10 @@
+(define (problem problem1)
+	(:domain domain)
+	(:objects 	o - o1)
+	(:init 	(gripper_free)
+		(staged o)			
+	)
+	(:goal
+		(and (grapped o) (not(staged o)) (not(gripper_free)))
+	)
+)
