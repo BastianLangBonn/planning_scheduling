@@ -1,0 +1,6 @@
+(unstage o3)
+(place o3 s)
+(unstage o2)
+(place o2 s)
+(unstage o1)
+(place o1 s)
