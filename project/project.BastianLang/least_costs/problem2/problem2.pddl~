@@ -24,10 +24,7 @@
 		(= (distance s3 s1) 2)
 	)
 	(:goal
-		(or
-			(and (line o1 o2_1 o2_2 s1) (line o2_1 o2_2 o3 s1) (line o2_2 o3 o4 s1))
 			(and (line o1 o2_2 o2_1 s1) (line o2_2 o2_1 o3 s1) (line o2_1 o3 o4 s1))
-		)
 	)
 	(:metric minimize (total-cost))
 )

@@ -11,6 +11,7 @@
 		(at_location o1 s1)
 		(at_location o2 s2)
 		(at_location o3 s3)
+		(= (total-cost) 0)
 		;Distance Metric
 
 		(= (distance s1 s1) 0)
@@ -28,7 +29,7 @@
 
 	)
 	(:goal
-		;(carries o1)
 		(line o1 o2 o3 s3)
 	)
+	(:metric minimize (total-cost))
 )

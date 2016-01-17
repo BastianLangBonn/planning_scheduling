@@ -26,7 +26,9 @@
 		(at_location o6 s3)
 		(at_location o7 s2)
 		(at_location o8 s3)
+		
 		;Distance Metric
+
 		(= (distance s1 s1) 0)
 		(= (distance s2 s2) 0)
 		(= (distance s3 s3) 0)

@@ -14,6 +14,7 @@
 		(at_location o2_2 s3)
 		(at_location o3 s3)
 		(at_location o4 s3)
+		(= (total-cost) 0)
 
 		;Distance Matrix
 
