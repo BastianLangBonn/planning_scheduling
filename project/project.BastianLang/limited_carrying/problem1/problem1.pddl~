@@ -11,50 +11,22 @@
 		(at_location o1 s1)
 		(at_location o2 s2)
 		(at_location o3 s3)
+		(carries_none)
 		;Distance Metric
 
 		(= (distance s1 s1) 0)
 		(= (distance s2 s2) 0)
 		(= (distance s3 s3) 0)
-		(= (distance s4 s4) 0)
-		(= (distance s5 s5) 0)
-		(= (distance s6 s6) 0)
 
 		(= (distance s1 s2) 1)
 		(= (distance s1 s3) 2)
-		(= (distance s1 s4) 5)
-		(= (distance s1 s5) 4)
-		(= (distance s1 s6) 5)
 
 		(= (distance s2 s1) 1)
 		(= (distance s2 s3) 1)
-		(= (distance s2 s4) 6)
-		(= (distance s2 s5) 4)
-		(= (distance s2 s6) 5)
 
 		(= (distance s3 s1) 2)
 		(= (distance s3 s2) 1)
-		(= (distance s3 s4) 4)
-		(= (distance s3 s5) 4)
-		(= (distance s3 s6) 3)
 
-		(= (distance s4 s1) 5)
-		(= (distance s4 s2) 6)
-		(= (distance s4 s3) 4)
-		(= (distance s4 s5) 2)
-		(= (distance s4 s6) 1)
-
-		(= (distance s5 s1) 4)
-		(= (distance s5 s2) 4)
-		(= (distance s5 s3) 4)
-		(= (distance s5 s4) 2)
-		(= (distance s5 s6) 2)
-
-		(= (distance s6 s1) 5)
-		(= (distance s6 s2) 5)
-		(= (distance s6 s3) 3)
-		(= (distance s6 s4) 1)
-		(= (distance s6 s5) 2)
 	)
 	(:goal
 		;(carries o1)

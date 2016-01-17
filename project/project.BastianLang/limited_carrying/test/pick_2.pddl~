@@ -3,8 +3,9 @@
 	(:objects 	s - s1
 			o - o1)
 	(:init 	(robot_at s)
-		(grapped o)
-		(carries_one)	
+		(at_location o s)
+		(gripper_free)	
+		(carries_two)	
 
 		;Distance Metric
 
@@ -14,6 +15,6 @@
 		
 	)
 	(:goal
-		(carries_none)
+		(and(carries_three)(not(carries_two)))
 	)
 )

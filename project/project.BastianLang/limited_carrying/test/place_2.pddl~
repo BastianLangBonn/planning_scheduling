@@ -14,6 +14,6 @@
 		
 	)
 	(:goal
-		(carries_none)
+		(and (carries_none)(not(carries_one)))
 	)
 )

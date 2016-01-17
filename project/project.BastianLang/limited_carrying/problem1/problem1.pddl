@@ -1,5 +1,5 @@
 (define (problem problem1)
-	(:domain domain)
+	(:domain complex_domain)
 	(:objects 	s1 - s1
 			s2 - s2
 			s3 - s3
@@ -11,6 +11,7 @@
 		(at_location o1 s1)
 		(at_location o2 s2)
 		(at_location o3 s3)
+		(carries_none)
 		;Distance Metric
 
 		(= (distance s1 s1) 0)

@@ -26,6 +26,7 @@
 		(at_location o6 s3)
 		(at_location o7 s2)
 		(at_location o8 s3)
+		(carries_none)
 		
 		;Distance Metric
 
@@ -75,4 +76,5 @@
 	(:goal
 		(and (line o6 o4 o3 s1) (line o8 o5_1 o5_2 s4) (line o1 o7 o2 s6))
 	)
+	(:metric minimize (total-cost))
 )

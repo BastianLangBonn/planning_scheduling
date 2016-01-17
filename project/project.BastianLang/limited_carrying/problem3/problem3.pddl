@@ -26,6 +26,8 @@
 		(at_location o6 s3)
 		(at_location o7 s2)
 		(at_location o8 s3)
+		(carries_none)
+		(= (total-cost) 0)
 		
 		;Distance Metric
 

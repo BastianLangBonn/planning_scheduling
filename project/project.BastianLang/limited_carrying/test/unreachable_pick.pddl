@@ -5,7 +5,7 @@
 	(:init 	(robot_at s)
 		(at_location o s)
 		(gripper_free)	
-		(carries_none)	
+		(carries_three)	
 
 		;Distance Metric
 
