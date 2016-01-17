@@ -5,6 +5,7 @@
 	)
 	(:init 	(grapped o)
 		(not(gripper_free))
+		(= (total-cost) 0)
 	)
 	(:goal
 		(and(staged o)(gripper_free)(not(grapped o)))

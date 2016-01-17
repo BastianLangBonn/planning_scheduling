@@ -1,11 +1,11 @@
 (define (problem problem1)
-	(:domain domain)
+	(:domain complex_domain)
 	(:objects 	s - s1
-			o - o1)
-	(:init 	(robot_at s)
+			o - o1
+			r - robot)
+	(:init 	(at_location r s)
 		(at_location o s)
-		(gripper_free)	
-		(carries_none)	
+		(gripper_free r)	
 
 		;Distance Metric
 
@@ -15,6 +15,6 @@
 		
 	)
 	(:goal
-		(carries_three)
+		(and (not(gripper_free r))(grapped r o)(not(at_location o s)))
 	)
 )

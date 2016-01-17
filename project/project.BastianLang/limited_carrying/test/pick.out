@@ -1,5 +1,1 @@
-(pick o2 s)
-(stage o2)
-(pick o1 s)
-(stage o1)
-(pick o3 s)
+(pick r o s)

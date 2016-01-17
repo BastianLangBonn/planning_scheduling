@@ -2,9 +2,10 @@
 	(:domain domain)
 	(:objects 	s1 - s1 
 			s2 - s2
+			r - robot
 	)
 	(:init 	
-		(robot_at s1)
+		(at_location r s1)
 		(= (distance s1 s1) 0)
 		(= (distance s2 s2) 0)
 		(= (distance s1 s2) 2)
@@ -12,6 +13,6 @@
 		(= (total-cost) 0)		
 	)	
 	(:goal
-		(robot_at s2)
+		(at_location r s2)
 	)
 )

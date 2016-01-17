@@ -2,12 +2,13 @@
 	(:domain domain)
 	(:objects 
 			o - o1
+			r - robot
 	)
-	(:init 	(grapped o)
-		(not(gripper_free))
+	(:init 	(grapped r o)
+		(not(gripper_free r))
 		(= (total-cost) 0)
 	)
 	(:goal
-		(and(staged o)(gripper_free)(not(grapped o)))
+		(and(staged r o)(gripper_free r)(not(grapped r o)))
 	)
 )

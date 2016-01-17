@@ -14,9 +14,11 @@
 			o6 - o6
 			o7 - o7
 			o8 - o8
+			r - robot
+			c0 c1 c2 c3 - capacity
 	)
-	(:init 	(robot_at s1)
-		(gripper_free)
+	(:init 	(at_location r s1)
+		(gripper_free r)
 		(at_location o1 s5)
 		(at_location o2 s3)
 		(at_location o3 s2)
@@ -26,8 +28,12 @@
 		(at_location o6 s3)
 		(at_location o7 s2)
 		(at_location o8 s3)
-		(carries_none)
 		(= (total-cost) 0)
+		(robot_capacity r c3)
+		(robot_carries r c0)
+		(preceding_capacities c0 c1)
+		(preceding_capacities c1 c2)
+		(preceding_capacities c2 c3)
 		
 		;Distance Metric
 
