@@ -1,0 +1,5 @@
+(pick r o1 s c0 c1)
+(place r o1 s)
+(pick r o2 s c1 c2)
+(align_with_object r o1 o2 s)
+(pick r o3 s c2 c3)
